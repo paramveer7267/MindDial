@@ -1,0 +1,25 @@
+name: Enforce Branch Naming Convention
+
+on:
+  push:
+    branches:
+      - "*" # run on all branches
+      - "!main" # exclude main
+      - "!dev" # exclude dev
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          echo "⏳ Checking branch: $BRANCH_NAME"
+
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix|release)\/[a-z0-9._-]+$ ]]; then
+            echo "❌ Invalid branch name: $BRANCH_NAME"
+            echo "👉 Branches must start with: feature/, bugfix/, hotfix/, or release/"
+            exit 1
+          fi
+
+          echo "✅ Branch name is valid!"
