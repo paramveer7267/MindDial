@@ -1,16 +1,21 @@
 {
   "name": "minddial",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev:web": "turbo run dev --filter=web",
+    "dev:mobile": "turbo run start --filter=mobile",
+    "dev:backend": "turbo run dev --filter=backend",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint"
   },
   "packageManager": "npm@11.4.2",
+  "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "repository": {
     "type": "git",
